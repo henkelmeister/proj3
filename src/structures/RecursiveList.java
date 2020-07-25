@@ -1,5 +1,7 @@
 package structures;
 
+import java.util.Iterator;
+
 public class RecursiveList<T> implements ListInterface<T> {
 
     private int size;
@@ -18,7 +20,8 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     @Override
-    public RecursiveList<T> insertFirst(T elem) {
+    public RecursiveList<T> insertFirst(T elem) throws NullPointerException {
+        if(elem == null)throw new NullPointerException();
         Node<T> newElem = new Node<T>(elem, null);
         if (this.isEmpty()) {
             head = newElem;
@@ -33,6 +36,12 @@ public class RecursiveList<T> implements ListInterface<T> {
 
     @Override
     public RecursiveList<T> insertLast(T elem) {
+        Node<T> newElem = new Node<T>(elem,null);
+        if(this.isEmpty()){
+            head = newElem;
+            tail = newElem;
+            return this;
+        }
 
         return this;
     }
@@ -97,6 +106,11 @@ public class RecursiveList<T> implements ListInterface<T> {
     @Override
     public boolean isEmpty() {
         return head == null;
+    }
+
+    @Override
+    public Iterator<T> iterator(){
+        return null;
     }
 
 }
