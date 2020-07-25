@@ -35,12 +35,15 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     @Override
-    public RecursiveList<T> insertLast(T elem) {
+    public RecursiveList<T> insertLast(T elem) throws NullPointerException {
+        if(elem == null)throw new NullPointerException();
         Node<T> newElem = new Node<T>(elem,null);
         if(this.isEmpty()){
             head = newElem;
             tail = newElem;
             return this;
+        } else{
+            
         }
 
         return this;
