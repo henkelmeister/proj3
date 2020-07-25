@@ -89,10 +89,23 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     @Override
-    public T removeAt(int i) {
+    public T removeAt(int i) throws IndexOutOfBoundsException {
+        if(i < 0 || i > size) throw new IndexOutOfBoundsException(); 
+        if(i == size - 1) return removeLast(); 
+        Node<T> start = head; 
+        Node<T> seccond = null; 
 
-        return T;
+        return removeAtHelper(start,seccond,i);   
     }
+
+    private T removeAtHelper(Node<T> start,Node<T> seccond,int i){
+        if(i == 0){
+            start.setNext(start.getNext().getNext()); 
+            return start.getData(); 
+        }
+        return removeAtHelper(start.getNext(),start,i-1);
+    }
+        //If does not work use the getHelper method instead
 
     @Override
     public T getFirst() {
@@ -114,13 +127,13 @@ public class RecursiveList<T> implements ListInterface<T> {
     public T get(int i) throws IndexOutOfBoundsException {
         if(i < 0 || i >= size) throw new IndexOutOfBoundsException();
 
-        return getHelper(i,head);
+        return getHelper(i,head).getData();
     }
 
-    private T getHelper(int j,Node<T> newHead){
+    private Node<T> getHelper(int j,Node<T> newHead){
 
         if(j == 0){
-            return newHead.getData(); 
+            return newHead;
         }
 
         return getHelper(j-1,newHead.getNext());

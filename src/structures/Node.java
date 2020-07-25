@@ -13,6 +13,7 @@ public class Node<T> {
     this.next = next;
   }
 
+
   /**
    * Returns the data from this node.
    *
