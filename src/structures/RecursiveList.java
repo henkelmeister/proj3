@@ -26,10 +26,12 @@ public class RecursiveList<T> implements ListInterface<T> {
         if (this.isEmpty()) {
             head = newElem;
             tail = newElem;
+            size++;
             return this;
         } else {
             newElem.setNext(head);
             head = newElem;
+            size++;
             return this;
         }
     }
@@ -41,12 +43,15 @@ public class RecursiveList<T> implements ListInterface<T> {
         if(this.isEmpty()){
             head = newElem;
             tail = newElem;
+            size++;
             return this;
         } else{
+            tail.setNext(newElem);
+            tail = newElem; 
+            size++;
+            return this; 
             
         }
-
-        return this;
     }
 
     @Override
@@ -56,15 +61,31 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     @Override
-    public T removeFirst() {
-
-        return T;
+    public T removeFirst() throws IllegalStateException {
+        if(isEmpty()) throw new IllegalStateException();
+        Node<T> tempNode = head;
+        head = head.getNext();
+        tempNode.setNext(null); 
+        return tempNode.getData();
     }
 
     @Override
-    public T removeLast() {
+    public T removeLast() throws IllegalStateException {
+        if(isEmpty())throw new IllegalStateException(); 
+        Node<T> last = head.getNext();
+        Node<T> seccondLast = head; 
+        return removeLastHelper(seccondLast, last);
+    }
 
-        return T;
+    private T removeLastHelper(Node<T> seccondLast, Node<T> last){
+
+        if(last.getNext()==null){
+            seccondLast.setNext(null);
+            tail = seccondLast; 
+            return seccondLast.getData();
+        }
+
+        return removeLastHelper(seccondLast.getNext(),last.getNext());
     }
 
     @Override
@@ -90,15 +111,41 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     @Override
-    public T get(int i) {
+    public T get(int i) throws IndexOutOfBoundsException {
+        if(i < 0 || i >= size) throw new IndexOutOfBoundsException();
 
-        return T;
+        return getHelper(i,head);
+    }
+
+    private T getHelper(int j,Node<T> newHead){
+
+        if(j == 0){
+            return newHead.getData(); 
+        }
+
+        return getHelper(j-1,newHead.getNext());
+
     }
 
     @Override
-    public boolean remove(T elem) {
+    public boolean remove(T elem) throws NullPointerException {
+        if(elem == null)throw new NullPointerException();
+       
+        return removeHelper(elem,head,null);
+    }
 
-        return false;
+    private boolean removeHelper(T elem,Node<T> currNode,Node<T> prevNode){
+        if(currNode == null)return false; 
+
+        if(elem.equals(currNode.getData())){
+            if(prevNode == null){
+                removeFirst();
+                return true; 
+            } 
+            prevNode.setNext(currNode.getNext());
+        return true; 
+        }
+        return removeHelper(elem,currNode.getNext(),currNode);
     }
 
     public int indexOf(T elem) {
