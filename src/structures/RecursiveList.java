@@ -55,31 +55,51 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     @Override
-    public ListInterface<T> insertAt(int index, T elem) {
-
+    public ListInterface<T> insertAt(int index, T elem)throws NullPointerException, IndexOutOfBoundsException {
+        if(elem == null)throw new NullPointerException();
+        if(index < 0 || index > size)throw new IndexOutOfBoundsException(); 
+        Node<T> insertAt = getHelper(index-1,head);
+        Node<T> insertedElem = new Node<T>(elem,insertAt.getNext()); 
+        if(isEmpty()){
+            this.insertFirst(elem); 
+            return this; 
+        }
+        insertedElem.setNext(insertAt.getNext());
+        insertAt.setNext(insertedElem);
+        size++;
         return this;
     }
 
     @Override
     public T removeFirst() throws IllegalStateException {
         if(isEmpty()) throw new IllegalStateException();
+        
         Node<T> tempNode = head;
         head = head.getNext();
-        tempNode.setNext(null); 
+        tempNode.setNext(null);
+        size--; 
         return tempNode.getData();
     }
 
     @Override
     public T removeLast() throws IllegalStateException {
         if(isEmpty())throw new IllegalStateException(); 
+
+        if(head.getNext().equals(tail)){
+            tail = head; 
+            size--;
+            return head.getData(); 
+        }
+
         Node<T> last = head.getNext();
         Node<T> seccondLast = head; 
+        size--;
         return removeLastHelper(seccondLast, last);
     }
 
     private T removeLastHelper(Node<T> seccondLast, Node<T> last){
 
-        if(last.getNext()==null){
+        if(last.getNext().equals(tail)){
             seccondLast.setNext(null);
             tail = seccondLast; 
             return seccondLast.getData();
@@ -92,6 +112,7 @@ public class RecursiveList<T> implements ListInterface<T> {
     public T removeAt(int i) throws IndexOutOfBoundsException {
         if(i < 0 || i > size) throw new IndexOutOfBoundsException(); 
         if(i == size - 1) return removeLast(); 
+        if(i == 0) return getFirst();
         Node<T> start = head; 
         Node<T> seccond = null; 
 
@@ -161,9 +182,26 @@ public class RecursiveList<T> implements ListInterface<T> {
         return removeHelper(elem,currNode.getNext(),currNode);
     }
 
-    public int indexOf(T elem) {
+    public int indexOf(T elem) throws NullPointerException {
+        
+        if(elem == null) throw new NullPointerException();
+        
+        if(head == null) return -1;
 
-        return -1;
+        return indexOfHelper(head,0,elem);
+
+    }
+
+    private int indexOfHelper(Node<T> head,int num,T elem){
+        if(isEmpty()) return -1; //empty list
+        
+        if(num == size - 1) return -1;
+
+        if(head.getData().equals(elem)) return num; 
+
+        return indexOfHelper(head.getNext(),++num,elem);
+
+
     }
 
     @Override
