@@ -25,9 +25,9 @@ public class ProjectTests {
     assertTrue("Newly constructed list should be empty.", list.isEmpty());
     assertEquals("Newly constructed list should be size 0.", 0, list.size());
     assertEquals("Insert First should return instance of self", list, list.insertFirst("yolo"));
-    assertEquals("Insert First should return instance of self", list, list.insertFirst("hello"));
+    assertEquals("Insert First should return instance of self", list, list.insertLast("hello"));
     assertEquals("Insert First should return instance of self", list, list.insertFirst("olo"));
-    assertEquals("Insert First should return instance of self", "yolo", list.removeLast());
+    assertEquals("Insert First should return instance of self", "hello", list.removeLast());
     assertFalse("List should now have elements.", list.isEmpty());
     assertEquals("List should now have 1 element.", 2, list.size());
     assertEquals("First element should .equals \"hello\".", "hello", list.getFirst());

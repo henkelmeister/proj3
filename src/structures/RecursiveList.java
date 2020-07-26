@@ -109,7 +109,7 @@ public class RecursiveList<T> implements ListInterface<T> {
             size--;
             return currNode.getData(); 
         }
-        return removeLastHelper(currNode.getNext(),numNode++);
+        return removeLastHelper(currNode.getNext(),numNode + 1);
     }
 
     @Override
