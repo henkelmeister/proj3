@@ -104,10 +104,11 @@ public class RecursiveList<T> implements ListInterface<T> {
     private T removeLastHelper(Node<T> currNode,int numNode){
 
         if(numNode == size -2){
+            T data = currNode.getNext().getData();
             currNode.setNext(null);
             tail = currNode;
             size--;
-            return currNode.getData(); 
+            return data; 
         }
         return removeLastHelper(currNode.getNext(),numNode + 1);
     }
