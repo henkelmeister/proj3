@@ -89,7 +89,7 @@ public class RecursiveList<T> implements ListInterface<T> {
 
     @Override
     public T removeLast() throws IllegalStateException {
-        if(isEmpty())throw new IllegalStateException(); 
+        if(isEmpty())throw new IllegalStateException();  
 
         if(size == 1){
             Node<T> tempNode = head;
