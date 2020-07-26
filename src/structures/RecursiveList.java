@@ -79,7 +79,7 @@ public class RecursiveList<T> implements ListInterface<T> {
             head = null;
             tail = null; 
             size--; 
-            return tempNode.get; 
+            return tempNode.getData(); 
         }else{
         
         Node<T> tempNode = head;
