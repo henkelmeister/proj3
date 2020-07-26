@@ -203,11 +203,11 @@ public class RecursiveList<T> implements ListInterface<T> {
     private int indexOfHelper(Node<T> head,int num,T elem){
         if(isEmpty()) return -1; //empty list
         
-        if(num == size - 1) return -1;
+        if(num == size) return -1;
 
         if(head.getData().equals(elem)) return num; 
 
-        return indexOfHelper(head.getNext(),++num,elem);
+        return indexOfHelper(head.getNext(),num + 1,elem);
 
 
     }
