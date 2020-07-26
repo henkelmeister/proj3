@@ -98,10 +98,10 @@ public class RecursiveList<T> implements ListInterface<T> {
             size--;
             return tempNode.getData(); 
         }
-        return removeLastHelper(head, null,0);
+        return removeLastHelper(head,0);
     }
 
-    private T removeLastHelper(Node<T> currNode, Node<T> NextNode,int numNode){
+    private T removeLastHelper(Node<T> currNode,int numNode){
 
         if(numNode == size -2){
             currNode.setNext(null);
@@ -109,7 +109,7 @@ public class RecursiveList<T> implements ListInterface<T> {
             size--;
             return currNode.getData(); 
         }
-        return removeLastHelper(currNode,currNode.getNext(),numNode++);
+        return removeLastHelper(currNode.getNext(),numNode++);
     }
 
     @Override
