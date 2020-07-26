@@ -75,8 +75,11 @@ public class RecursiveList<T> implements ListInterface<T> {
         if(isEmpty()) throw new IllegalStateException();
 
         if(size == 1){
+            Node<T> tempNode = head;
             head = null;
-            return null; 
+            tail = null; 
+            size--; 
+            return tempNode.getData(); 
         }else{
         
         Node<T> tempNode = head;
@@ -92,7 +95,6 @@ public class RecursiveList<T> implements ListInterface<T> {
         if(isEmpty())throw new IllegalStateException();  
 
         if(size == 1){
-            Node<T> tempNode = head;
             head = null;
             tail = null; 
             size--;
