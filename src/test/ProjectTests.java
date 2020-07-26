@@ -24,7 +24,9 @@ public class ProjectTests {
   public void testInsertFirstIsEmptySizeAndGetFirst1() {
     assertTrue("Newly constructed list should be empty.", list.isEmpty());
     assertEquals("Newly constructed list should be size 0.", 0, list.size());
+    assertEquals("Insert First should return instance of self", list, list.insertFirst("yolo"));
     assertEquals("Insert First should return instance of self", list, list.insertFirst("hello"));
+    assertEquals("Insert First should return instance of self", "bull", list.removeLast());
     assertFalse("List should now have elements.", list.isEmpty());
     assertEquals("List should now have 1 element.", 1, list.size());
     assertEquals("First element should .equals \"hello\".", "hello", list.getFirst());

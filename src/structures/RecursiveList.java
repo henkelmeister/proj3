@@ -73,39 +73,43 @@ public class RecursiveList<T> implements ListInterface<T> {
     @Override
     public T removeFirst() throws IllegalStateException {
         if(isEmpty()) throw new IllegalStateException();
+
+        if(size == 1){
+            head = null;
+            return null; 
+        }else{
         
         Node<T> tempNode = head;
         head = head.getNext();
         tempNode.setNext(null);
         size--; 
         return tempNode.getData();
+        }
     }
 
     @Override
     public T removeLast() throws IllegalStateException {
         if(isEmpty())throw new IllegalStateException(); 
 
-        if(head.getNext().equals(tail)){
-            tail = head; 
+        if(size == 1){
+            Node<T> tempNode = head;
+            head = null;
+            tail = null; 
             size--;
-            return head.getData(); 
+            return tempNode.getData(); 
         }
-
-        Node<T> last = head.getNext();
-        Node<T> seccondLast = head; 
-        size--;
-        return removeLastHelper(seccondLast, last);
+        return removeLastHelper(head, null,0);
     }
 
-    private T removeLastHelper(Node<T> seccondLast, Node<T> last){
+    private T removeLastHelper(Node<T> currNode, Node<T> NextNode,int numNode){
 
-        if(last.getNext().equals(tail)){
-            seccondLast.setNext(null);
-            tail = seccondLast; 
-            return seccondLast.getData();
+        if(numNode == size -2){
+            currNode.setNext(null);
+            tail = currNode;
+            size--;
+            return currNode.getData(); 
         }
-
-        return removeLastHelper(seccondLast.getNext(),last.getNext());
+        return removeLastHelper(currNode,currNode.getNext(),numNode++);
     }
 
     @Override
