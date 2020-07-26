@@ -129,8 +129,10 @@ public class RecursiveList<T> implements ListInterface<T> {
 
     private T removeAtHelper(Node<T> start,Node<T> seccond,int i){
         if(i == 0){
+            T temp = start.getNext().getData(); 
             start.setNext(start.getNext().getNext()); 
-            return start.getData(); 
+            size--; 
+            return temp; 
         }
         return removeAtHelper(start.getNext(),start,i-1);
     }
