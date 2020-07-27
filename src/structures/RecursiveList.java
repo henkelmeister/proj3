@@ -60,7 +60,7 @@ public class RecursiveList<T> implements ListInterface<T> {
         if(index < 0 || index > size){
             throw new IndexOutOfBoundsException(); 
         }
-        if(isEmpty()){
+        if(index == 0){
             return this.insertFirst(elem);  
         }
 
@@ -110,7 +110,8 @@ public class RecursiveList<T> implements ListInterface<T> {
     //Can be used for more than one method (multiple applications)
     @Override
     public T removeAt(int i) throws IndexOutOfBoundsException {
-        if(i < 0 || i >= size){ throw new IndexOutOfBoundsException(); 
+        if(i < 0 || i >= size){ 
+            throw new IndexOutOfBoundsException(); 
         }
         if(i == 0){ 
             return removeFirst();
@@ -152,6 +153,7 @@ public class RecursiveList<T> implements ListInterface<T> {
     }
 
     private Node<T> getHelper(int j,Node<T> currNode){
+        if(j == -1) return head; 
 
         if(j == 0){
             return currNode;
@@ -194,16 +196,18 @@ public class RecursiveList<T> implements ListInterface<T> {
         
         if(isEmpty()) return -1;
 
+        if(head.getData().equals(elem))return 0;
+
         return indexOfHelper(head,0,elem);
 
     }
 
     private int indexOfHelper(Node<T> currNode,int num,T elem){
-        if(isEmpty()) return -1; //empty list
-        
-        if(num == size) return -1;
 
-        if(currNode.getData().equals(elem)) return num; 
+        if(currNode.getData().equals(elem)) return num + 1;
+
+        if(currNode.getNext() == null) return -1;
+ 
 
         return indexOfHelper(currNode.getNext(),num + 1,elem);
 

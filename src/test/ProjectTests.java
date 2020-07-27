@@ -33,9 +33,9 @@ public class ProjectTests {
     assertEquals("First element should .equals \"hello\".", "first", list.getFirst());
     list.insertFirst("world");
     assertEquals(3, list.size());
-    list.insertFirst("foo");
+    list.insertFirst("first first");
     assertEquals(4, list.size());
-    assertEquals("First element should .equals \"foo\".", "foo", list.getFirst());
+    assertEquals("First element should .equals \"foo\".", "first first", list.getFirst());
   }
 
 }
