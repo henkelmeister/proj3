@@ -204,10 +204,9 @@ public class RecursiveList<T> implements ListInterface<T> {
 
     private int indexOfHelper(Node<T> currNode,int num,T elem){
 
-        if(currNode.getNext().getData().equals(elem)) return num + 1;
-
         if(currNode.getNext() == null) return -1;
  
+        if(currNode.getNext().getData().equals(elem)) return num + 1;
 
         return indexOfHelper(currNode.getNext(),num + 1,elem);
 
